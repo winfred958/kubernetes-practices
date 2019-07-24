@@ -1,9 +1,10 @@
 # 1. 获取默认初始化参数文件
- >> kubeadm config print init-defaults > kubeadm-config.yaml
+ > *  kubeadm config print init-defaults > kubeadm-config.yaml
 
 # 2. 修改 kubeadm-config.yaml
 
- >> 可以修改镜像仓库 imageRepository: local.xxx.repository
+ > *  修改镜像仓库 imageRepository: local.xxx.repository
+ > *  配置 external etcd
 ``` 
 apiVersion: kubeadm.k8s.io/v1beta2
 bootstrapTokens:
@@ -46,4 +47,4 @@ scheduler: {}
 ```
 
 # 3. kubeadm init master
->>kubeadm init --config=kubeadm-config.yaml
+> * kubeadm init --config=kubeadm-config.yaml

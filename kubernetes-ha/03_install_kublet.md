@@ -1,6 +1,6 @@
 ## 1.配置仓库
->> vim /etc/yum.repos.d/kubernetes.repo
->> aliyun 镜像
+ > * vim /etc/yum.repos.d/kubernetes.repo   # (aliyun 镜像)
+
 ```
 name=Kubernetes
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
@@ -11,4 +11,8 @@ gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors
 exclude=kube*
 ```
 ## 2. 安装
->>yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+> yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+## 3. 配置自启动
+> * systemctl enable kubectl
+> * systemctl start kubectl
