@@ -13,8 +13,13 @@ h3.k8s.local
 #ETCD_CORS=""
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
 #ETCD_WAL_DIR=""
+
+# 集群内使用的url
 ETCD_LISTEN_PEER_URLS="http://h1.k8s.local:2380"
+
+# 外部客户端使用的url
 ETCD_LISTEN_CLIENT_URLS="http://127.0.0.1:2379,http://h1.k8s.local:2379"
+
 #ETCD_MAX_SNAPSHOTS="5"
 #ETCD_MAX_WALS="5"
 ETCD_NAME="default"
@@ -28,15 +33,27 @@ ETCD_NAME="default"
 #ETCD_GRPC_KEEPALIVE_TIMEOUT="20s"
 #
 #[Clustering]
+
+# 广播给集群内其他成员的url
 ETCD_INITIAL_ADVERTISE_PEER_URLS="http://h1.k8s.local:2380"
-ETCD_ADVERTISE_CLIENT_URLS="http://h1.k8s.local:2379,http://h2.k8s.local:2379,http://h3.k8s.local:2379"
+
+# 广播给外部客户端的url
+ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379,http://h1.k8s.local:2379"
+
 #ETCD_DISCOVERY=""
 #ETCD_DISCOVERY_FALLBACK="proxy"
 #ETCD_DISCOVERY_PROXY=""
 #ETCD_DISCOVERY_SRV=""
+
+# 初始集群成员列表
 ETCD_INITIAL_CLUSTER="etcd01=http://h1.k8s.local:2380,etcd02=http://h2.k8s.local:2380,etcd03=http://h3.k8s.local:2380"
+
+# 集群名称
 ETCD_INITIAL_CLUSTER_TOKEN="my-etcd-cluster"
+
+# 初始集群状态, new为新建集群
 ETCD_INITIAL_CLUSTER_STATE="new"
+
 #ETCD_STRICT_RECONFIG_CHECK="true"
 #ETCD_ENABLE_V2="true"
 #
