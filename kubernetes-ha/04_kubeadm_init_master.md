@@ -46,6 +46,15 @@ networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
 scheduler: {}
+etcd:
+  external:
+    endpoints:
+    - https://h1.k8s.local:2379
+    - https://h2.k8s.local:2379
+    - https://h3.k8s.local:2379
+    caFile: /etc/kubernetes/pki/etcd/ca.crt
+    certFile: /etc/kubernetes/pki/aipserver-etcdd-client.crt
+    keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
 ```
 
 # 3. kubeadm init master

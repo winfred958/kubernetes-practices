@@ -8,6 +8,8 @@ h3.k8s.local
 ```
 ## 2. 修改配置
 > * vim /etc/etcd/etcd.conf
+
+h1.k8s.local
 ```
 #[Member]
 #ETCD_CORS=""
@@ -96,6 +98,10 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 #[Auth]
 #ETCD_AUTH_TOKEN="simple"
 ```
+
+h2.k8s.local
+h3.k8s.local
+需要设置ETCD_INITIAL_CLUSTER_STATE="exist"
 
 ## 3. etcd  自启动
 > * systemctl enable etcd
