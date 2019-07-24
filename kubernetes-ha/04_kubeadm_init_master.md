@@ -5,7 +5,9 @@
 
  > *  修改镜像仓库 imageRepository: local.xxx.repository
  > *  配置 external etcd
-``` 
+ 
+ 举例
+```
 apiVersion: kubeadm.k8s.io/v1beta2
 bootstrapTokens:
 - groups:
@@ -47,4 +49,19 @@ scheduler: {}
 ```
 
 # 3. kubeadm init master
-> * kubeadm init --config=kubeadm-config.yaml
+> * kubeadm init --config=kubeadm-config.yaml --pod-network-cidr=192.168.0.0/16
+```
+网络插件安装需要指定特殊参数
+例如 calico 需要指定 --pod-network-cidr
+kubeadm init --config=kubeadm-config.yaml --pod-network-cidr=192.168.0.0/16
+```
+```
+安装成功会提示
+kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
+```
+> * mkdir $HOME/.kube
+> * sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+> * sudo chown currentUser:currentUserGroup  $HOME/.kube/config
+
+# 4. node 加入集群
+> * 在需要加入集群的node执行: kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
