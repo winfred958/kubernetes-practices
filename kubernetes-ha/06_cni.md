@@ -5,6 +5,7 @@ kubadmin不涉及网络插件CNI的初始化
 任何pod自带的的coreDNS都无法正常工作
 ```
 # 2. CNI 插件 calico
+## 2.1 calico 安装说明
 ```
 网络插件安装需要指定特殊参数
 例如 calico 需要指定 --pod-network-cidr
@@ -24,3 +25,7 @@ kubeadm init --config=xxx.yaml --pod-network-cidr=192.168.0.0/16
 	4. 在每个Node上都安装Calico CNI二进制文件和网络篇日志参数(由install-cli完成)
 	5. 部署一个名为calico/kube-policy-controller的Deployment,以对接集群中为Pod设置的Network Policy
 ```
+
+## 2.1 calico 安装步骤
+  * [calico 官方 Quickstart](https://docs.projectcalico.org/v3.8/getting-started/kubernetes/)
+  * [Installing Calico for policy and networking (recommended)](https://docs.projectcalico.org/v3.8/getting-started/kubernetes/installation/calico)
