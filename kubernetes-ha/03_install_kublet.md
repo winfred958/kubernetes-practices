@@ -14,5 +14,5 @@ exclude=kube*
 > yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
 ## 3. 配置自启动
-> * systemctl enable kubectl
-> * systemctl start kubectl
+> * systemctl enable kubelet
+> * systemctl start kubelet
