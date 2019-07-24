@@ -53,7 +53,7 @@ etcd:
     - https://h2.k8s.local:2379
     - https://h3.k8s.local:2379
     caFile: /etc/kubernetes/pki/etcd/ca.crt
-    certFile: /etc/kubernetes/pki/aipserver-etcdd-client.crt
+    certFile: /etc/kubernetes/pki/aipserver-etcd-client.crt
     keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
 ```
 
