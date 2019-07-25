@@ -40,7 +40,7 @@ ETCD_NAME="default"
 ETCD_INITIAL_ADVERTISE_PEER_URLS="http://h1.k8s.local:2380"
 
 # 广播给外部客户端的url
-ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379,http://h1.k8s.local:2379"
+ETCD_ADVERTISE_CLIENT_URLS="http://h1.k8s.local:2379"
 
 #ETCD_DISCOVERY=""
 #ETCD_DISCOVERY_FALLBACK="proxy"
@@ -101,9 +101,69 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 
 > * h2.k8s.local
 > * h3.k8s.local
-> * 需要设置ETCD_INITIAL_CLUSTER_STATE="exist"
 
 ## 3. etcd  自启动
+### 3.1 修改 /usr/lib/systemd/system/etcd.service
+> * vim /usr/lib/systemd/system/etcd.service
+```
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+WorkingDirectory=/var/lib/etcd/
+EnvironmentFile=-/etc/etcd/etcd.conf
+User=etcd
+# set GOMAXPROCS to number of processors
+
+ExecStart=/bin/bash -c "GOMAXPROCS=$(nproc) /usr/bin/etcd \
+ --name=\"${ETCD_NAME}\" \
+ --data-dir=\"${ETCD_DATA_DIR}\" \
+ --listen-peer-urls=\"${ETCD_LISTEN_PEER_URLS}\" \
+ --listen-client-urls=\"${ETCD_LISTEN_CLIENT_URLS}\" \
+ --advertise-client-urls=\"${ETCD_ADVERTISE_CLIENT_URLS}\" \
+ --initial-advertise-peer-urls=\"${ETCD_INITIAL_ADVERTISE_PEER_URLS}\" \
+ --initial-cluster-token=\"${ETCD_INITIAL_CLUSTER_TOKEN}\" \
+ --initial-cluster=\"${ETCD_INITIAL_CLUSTER}\" \
+ --initial-cluster-state=\"${ETCD_INITIAL_CLUSTER_STATE}\""
+
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+```
+### 3.2 添加自启动
 > * systemctl enable etcd
 > * systemctl start etcd
 > * systemctl status etcd
+
+## 4.验证etcd
+### 4.1
+> * etcdctl member list
+```
+[root@host-01 ~]# etcdctl member list
+39c503e55d72d28: name=etcd3 peerURLs=http://host-03:2380 clientURLs=http://127.0.0.1:2379,http://host-03:2379 isLeader=false
+db08cbcec431402d: name=etcd1 peerURLs=http://host-01:2380 clientURLs=http://host-01:2379 isLeader=false
+f843f53469625da2: name=etcd2 peerURLs=http://host-02:2380 clientURLs=http://127.0.0.1:2379,http://host-02:2379 isLeader=true
+```
+> * @host-01 运行: etcdctl set /test/test-path "test"
+> * @host-03 运行: etcdctl get /test/test-path
+```
+[root@host-01 ~]# etcdctl set /test/test-path "test"
+test
+```
+```
+[root@host-03 ~]# etcdctl get /test/test-path 
+test
+```
+
+## 5.遇到的问题
+### 5.1 hostname 无法识别
+> * 解决方案: client url 使用 ip
+```
+error verifying flags, expected IP in URL for binding (http://host-01:2380). See 'etcd --help'.
+```
