@@ -9,7 +9,7 @@ bootstrapTokens:
       - authentication
 kind: InitConfiguration
 localAPIEndpoint:
-  advertiseAddress: 1.2.3.4
+  advertiseAddress: 0.0.0.0
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
@@ -37,7 +37,7 @@ etcd:
     keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
 imageRepository: k8s.gcr.io
 kind: ClusterConfiguration
-kubernetesVersion: v1.14.0
+kubernetesVersion: v1.15.0
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12

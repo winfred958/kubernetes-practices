@@ -168,3 +168,10 @@ test
 error verifying flags, expected IP in URL for binding (http://host-01:2380). See 'etcd --help'.
 ```
 > * 解决方案: client url 使用 ip
+
+### 5.2 etcd 重启, 无法启动
+#### 5.2.1 解决方案1:
+- 节点作为新节点重新加入集群
+    - etcdctl member add ${ETCD_NAME} http://xx.xx.xx.xx:2380
+    - 目标节点请空data-dir
+    - 目标节点启动etcd, 需要修改 --initial-cluster-state existing
