@@ -142,7 +142,7 @@ WantedBy=multi-user.target
 > * systemctl status etcd
 
 ## 4.验证etcd
-### 4.1
+### 4.1 查看节点
 > * etcdctl member list
 ```
 [root@host-01 ~]# etcdctl member list
@@ -150,6 +150,7 @@ WantedBy=multi-user.target
 db08cbcec431402d: name=etcd1 peerURLs=http://host-01:2380 clientURLs=http://host-01:2379 isLeader=false
 f843f53469625da2: name=etcd2 peerURLs=http://host-02:2380 clientURLs=http://127.0.0.1:2379,http://host-02:2379 isLeader=true
 ```
+### 4.2 数据写入验证
 > * @host-01 运行: etcdctl set /test/test-path "test"
 > * @host-03 运行: etcdctl get /test/test-path
 ```
@@ -163,7 +164,7 @@ test
 
 ## 5.遇到的问题
 ### 5.1 hostname 无法识别
-> * 解决方案: client url 使用 ip
 ```
 error verifying flags, expected IP in URL for binding (http://host-01:2380). See 'etcd --help'.
 ```
+> * 解决方案: client url 使用 ip
