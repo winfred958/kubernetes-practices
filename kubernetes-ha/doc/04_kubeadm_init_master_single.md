@@ -23,7 +23,7 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
-  name: h1.k8s.local
+  name: h1-k8s-local
   taints:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
@@ -49,9 +49,9 @@ scheduler: {}
 etcd:
   external:
     endpoints:
-    - https://h1.k8s.local:2379
-    - https://h2.k8s.local:2379
-    - https://h3.k8s.local:2379
+    - https://h1-k8s-local:2379
+    - https://h2-k8s-local:2379
+    - https://h3-k8s-local:2379
     caFile: /etc/kubernetes/pki/etcd/ca.crt
     certFile: /etc/kubernetes/pki/aipserver-etcd-client.crt
     keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key

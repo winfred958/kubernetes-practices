@@ -2,14 +2,14 @@
 > * yum install -y etcd
 ```
 三节点:
-h1.k8s.local
-h2.k8s.local
-h3.k8s.local
+h1-k8s-local
+h2-k8s-local
+h3-k8s-local
 ```
 ## 2. 修改配置
 > * vim /etc/etcd/etcd.conf
 
-h1.k8s.local
+h1-k8s-local
 ```
 #[Member]
 #ETCD_CORS=""
@@ -17,10 +17,10 @@ ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
 #ETCD_WAL_DIR=""
 
 # 集群内使用的url
-ETCD_LISTEN_PEER_URLS="http://h1.k8s.local:2380"
+ETCD_LISTEN_PEER_URLS="http://h1-k8s-local:2380"
 
 # 外部客户端使用的url
-ETCD_LISTEN_CLIENT_URLS="http://127.0.0.1:2379,http://h1.k8s.local:2379"
+ETCD_LISTEN_CLIENT_URLS="http://127.0.0.1:2379,http://h1-k8s-local:2379"
 
 #ETCD_MAX_SNAPSHOTS="5"
 #ETCD_MAX_WALS="5"
@@ -37,10 +37,10 @@ ETCD_NAME="default"
 #[Clustering]
 
 # 广播给集群内其他成员的url
-ETCD_INITIAL_ADVERTISE_PEER_URLS="http://h1.k8s.local:2380"
+ETCD_INITIAL_ADVERTISE_PEER_URLS="http://h1-k8s-local:2380"
 
 # 广播给外部客户端的url
-ETCD_ADVERTISE_CLIENT_URLS="http://h1.k8s.local:2379"
+ETCD_ADVERTISE_CLIENT_URLS="http://h1-k8s-local:2379"
 
 #ETCD_DISCOVERY=""
 #ETCD_DISCOVERY_FALLBACK="proxy"
@@ -48,7 +48,7 @@ ETCD_ADVERTISE_CLIENT_URLS="http://h1.k8s.local:2379"
 #ETCD_DISCOVERY_SRV=""
 
 # 初始集群成员列表
-ETCD_INITIAL_CLUSTER="etcd01=http://h1.k8s.local:2380,etcd02=http://h2.k8s.local:2380,etcd03=http://h3.k8s.local:2380"
+ETCD_INITIAL_CLUSTER="etcd01=http://h1-k8s-local:2380,etcd02=http://h2-k8s-local:2380,etcd03=http://h3-k8s-local:2380"
 
 # 集群名称
 ETCD_INITIAL_CLUSTER_TOKEN="my-etcd-cluster"
@@ -99,8 +99,8 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 #ETCD_AUTH_TOKEN="simple"
 ```
 
-> * h2.k8s.local
-> * h3.k8s.local
+> * h2-k8s-local
+> * h3-k8s-local
 
 ## 3. etcd  自启动
 ### 3.1 修改 /usr/lib/systemd/system/etcd.service
