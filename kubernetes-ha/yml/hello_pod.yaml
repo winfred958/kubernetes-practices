@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod                                # 表名是Pod的定义
+metadata:
+  name: hello_tomcat                     # Pod name
+  labels:
+    name: hello_tomcat                   # label: name=hello_tomcat
+spec:
+  containers:
+    - name: hello_tomcat                 # 本pod 包含一个container, container name
+      image: kubeguide/tomcat-app:vl     # container image
+      ports:
+        - containerPort: 8080
+      env:
+        - name: MYSQL_SERVICE_HOST      # 环境变量 MYSQL_SERVICE_HOST=mysql
+          value: "mysql"
+        - name: MYSQL_SERVICE_PORT      # 环境变量 MYSQL_SERVICE_PORT=3306
+          value: 3306
+      resources:                        # 资源配额
+        requests:                       # 初始化资源大小
+          memory: 1G
+          cpu: "250m"                   # 0.25 cpu
+        limits:                         # 使用的最大资源配额
+          memory: 2G
+          cpu: "500m"
