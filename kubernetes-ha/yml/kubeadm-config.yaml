@@ -18,9 +18,10 @@ nodeRegistration:
     - effect: NoSchedule
       key: node-role.kubernetes.io/master
 ---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
 apiServer:
   timeoutForControlPlane: 4m0s
-apiVersion: kubeadm.k8s.io/v1beta2
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
 controllerManager: {}
@@ -36,9 +37,9 @@ etcd:
     certFile: /etc/kubernetes/pki/aipserver-etcd-client.crt
     keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
 imageRepository: k8s.gcr.io
-kind: ClusterConfiguration
 kubernetesVersion: v1.15.0
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
+  podSubnet: 192.168.0.0/16
 scheduler: {}

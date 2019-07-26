@@ -8,8 +8,21 @@ kubadmin不涉及网络插件CNI的初始化
 ## 2.1 calico 安装说明
 ```
 网络插件安装需要指定特殊参数
-例如 calico 需要指定 --pod-network-cidr
-kubeadm init --config=xxx.yaml --pod-network-cidr=192.168.0.0/16
+例如 calico 需要指定 kubeadm init --pod-network-cidr=192.168.0.0/16
+```
+- 下载 calico.yml
+    - curl -O https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+- 修改 calico.yaml
+    - 添加 data.etcd_endpoints: "http://xxx:2379,http://xxx:2379"
+- 安装 kubeadm deploy -f calico.yaml 
+
+calico.yaml
+```
+            # The default IPv4 pool to create on startup if none exists. Pod IPs will be
+            # chosen from this range. Changing this value after installation will have
+            # no effect. This should fall within `--cluster-cidr`.
+            - name: CALICO_IPV4POOL_CIDR
+              value: "192.168.0.0/16"
 ```
 ```
 修改kubnetes服务启动参数, 并重启
