@@ -1,6 +1,8 @@
 # kubernetes dashboard 安装
-## 1. 下载 yaml 配置文件 apply
+## 1. kubernetes [dashboard install](https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup) 
  - [官网教程](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#deploying-the-dashboard-ui)
+ - [github](https://github.com/kubernetes/dashboard)
+ - [wiki](https://github.com/kubernetes/dashboard/wiki)
 ```
 curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml
 mv recommended.yaml kubernetes-dashboard.yaml
@@ -39,5 +41,21 @@ kubectl apply -f kubernetes-dashboard-adminuser.yaml
  ```
  kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
  ```
- - 使用token登录
- -  ![avatar](images/kubenetes-dashboard-token.PNG)
+ - ![avatar](images/kubenetes-dashboard-token.PNG)
+ 
+## 4. 生成SSL证书 & 添加到浏览器(api server 方式访问)
+ - 生成SSL证书
+ ``` bash
+ # 生成client-certificate-data
+ grep 'client-certificate-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.crt
+ # 生成client-key-data
+ grep 'client-key-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.key
+ # 生成p12
+ openssl pkcs12 -export -clcerts -inkey kubecfg.key -in kubecfg.crt -out kubecfg.p12 -name "kubernetes-client"
+ ```
+ - kubecfg.p12 证书添加到浏览器, 个人
+ - 访问: https://192.168.137.101:6443/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+ - 使用token登录(第3部生成的token)
+ - ![avatar](images/kubenetes-dashboard-page.png)
+ 
+    
