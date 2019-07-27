@@ -8,10 +8,11 @@
 
 ## 2. 修改 kubeadm-config.yaml
 
- > *  修改镜像仓库 imageRepository: local.xxx.repository
- > *  配置 external etcd
+ > * 修改镜像仓库 imageRepository: local.xxx.repository
+ > * 配置 external etcd
+ > * podSubnet: 192.168.0.0/16
  
- 举例
+ 举例 external etcd
 ```
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
@@ -65,12 +66,12 @@ scheduler: {}
 ```text
 kubeadm init
 网络插件安装需要指定特殊参数
-例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16
+例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16 (默认)
 
 注意: 也可以指定其他无冲突网段, 例如: 172.20.0.0/16, 与calico.yaml 中 CALICO_IPV4POOL_CIDR 保持一致
 
 --config 和 --pod-network-cidr不能同时存在
-所以需要使用命令行方式: 
+所以需要使用命令行方式(recommend): 
   kubeadm init \
     --apiserver-advertise-address=0.0.0.0 \
     --apiserver-bind-port 6443 \
