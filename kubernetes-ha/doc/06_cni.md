@@ -1,4 +1,5 @@
-# 1. CNI
+# 1.kubernetes CNI 网络插件
+ - [官网 CNI 教程](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 ```
 kubadmin不涉及网络插件CNI的初始化
 因此kubeadm初步安装的机器不具备网络功能
