@@ -13,11 +13,12 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
-  name: h1-k8s-local
+  name: h01-k8s-local
   taints:
     - effect: NoSchedule
       key: node-role.kubernetes.io/master
 ---
+
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 apiServer:
@@ -30,16 +31,17 @@ dns:
 etcd:
   external:
     endpoints:
-      - https://h1-k8s-local:2379
-      - https://h2-k8s-local:2379
-      - https://h3-k8s-local:2379
-    caFile: /etc/kubernetes/pki/etcd/ca.crt
-    certFile: /etc/kubernetes/pki/aipserver-etcd-client.crt
-    keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
+      - http://h01-k8s-local:2379
+      - http://h02-k8s-local:2379
+      - http://h03-k8s-local:2379
+#    caFile: /etc/kubernetes/pki/etcd/ca.crt
+#    certFile: /etc/kubernetes/pki/aipserver-etcd-client.crt
+#    keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key
 imageRepository: k8s.gcr.io
 kubernetesVersion: v1.15.0
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
-  podSubnet: 192.168.0.0/16
+  podSubnet: 172.20.0.0/16
 scheduler: {}
+

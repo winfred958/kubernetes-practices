@@ -12,7 +12,7 @@ data:
   # Configure the backend to use.
   calico_backend: "bird"
 
-  # etcd_endpoints: "http://192.168.137.101:2379,http://192.168.137.102:2379,http://192.168.137.103:2379"
+  etcd_endpoints: "http://192.168.137.101:2379,http://192.168.137.102:2379,http://192.168.137.103:2379"
 
   # Configure the MTU to use
   veth_mtu: "1440"
@@ -23,6 +23,7 @@ data:
     {
       "name": "k8s-pod-network",
       "cniVersion": "0.3.1",
+      "etcd_endpoints": "http://192.168.137.101:2379,http://192.168.137.102:2379,http://192.168.137.103:2379",
       "plugins": [
         {
           "type": "calico",
@@ -616,12 +617,12 @@ spec:
                   key: veth_mtu
             # The default IPv4 pool to create on startup if none exists. Pod IPs will be
             # chosen from this range. Changing this value after installation will have
-            # no effect. This should fall within "--cluster-cidr".
+            # no effect. This should fall within `--cluster-cidr`.
             - name: CALICO_IPV4POOL_CIDR
-              value: "172.18.0.0/16"
+              value: "172.20.0.0/16"
             - name: POD_CIDR
-              value: "172.18.0.0/16"
-            # Disable file logging so "kubectl logs" works.
+              value: "172.20.0.0/16"
+            # Disable file logging so `kubectl logs` works.
             - name: CALICO_DISABLE_FILE_LOGGING
               value: "true"
             # Set Felix endpoint to host default action to ACCEPT.
