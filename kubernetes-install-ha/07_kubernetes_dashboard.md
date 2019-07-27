@@ -44,7 +44,7 @@ kubectl apply -f kubernetes-dashboard-adminuser.yaml
  ```
  - ![avatar](images/kubenetes-dashboard-token.PNG)
  
-## 4. 生成SSL证书 & 添加到浏览器(api server 方式访问)
+## 4. 生成SSL证书 & 添加到浏览器(适用 api server 方式访问)
  - 生成SSL证书
  ```bash
  # 生成client-certificate-data
