@@ -3,7 +3,7 @@
  - [before begin](01-before-begin.md)
  - [install kubelet kubeadm kubectl](03-install-kublet.md)
 ## 1. 获取默认初始化参数文件
- > *  [kubeadm init config文档](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
+ > *  [kubeadm init config文档(kubeadm/v1beta2)](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
  > *  kubeadm config print init-defaults > kubeadm-config.yaml
 
 ## 2. 修改 kubeadm-config.yaml
@@ -67,7 +67,7 @@ kubeadm init
 网络插件安装需要指定特殊参数
 例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16
 
-也可以指定其他无冲突网段, 例如: 172.20.0.0/16
+注意: 也可以指定其他无冲突网段, 例如: 172.20.0.0/16, 与calico.yaml 中 CALICO_IPV4POOL_CIDR 保持一致
 
 --config 和 --pod-network-cidr不能同时存在
 所以需要使用命令行方式: 
