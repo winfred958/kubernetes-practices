@@ -40,4 +40,4 @@ kubectl apply -f kubernetes-dashboard-adminuser.yaml
  kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
  ```
  - 使用token登录
- -  ![avatar](../images/kubenetes-dashboard-token.PNG)
+ -  ![avatar](images/kubenetes-dashboard-token.PNG)
