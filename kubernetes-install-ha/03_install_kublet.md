@@ -1,6 +1,6 @@
-# kubernetes kubelet install
+# kubernetes kubelet install [官网](https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#%E5%AE%89%E8%A3%85-kubeadm-kubelet-%E5%92%8C-kubectl)
 ## 1.配置仓库
- > * vim /etc/yum.repos.d/kubernetes.repo   # (aliyun 镜像)
+ > * vim /etc/yum.repos.d/kubernetes.repo   #(aliyun 镜像)
 
 ```bash
 name=Kubernetes
@@ -11,9 +11,22 @@ repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 exclude=kube*
 ```
-## 2. 安装 kubelet kubeadm kubectl
+
+## 2. node 环境修改
+ - 关闭 selinux
+   - 临时: setenforce 0
+   - 永久: vim /etc/selinux/config
+      - SELINUX=disabled
+ - 关闭 firewall
+   - systemctl stop firewalld.service & systemctl disable firewalld.service
+
+## 3. 安装依赖
+ - Troubleshooting kubeadm
+    - yum install ebtables ethtool
+    
+## 4. 安装 kubelet kubeadm kubectl
  - yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
-## 3. 配置自启动
+## 5. 配置自启动
 > * systemctl enable kubelet
 > * systemctl start kubelet
