@@ -1,9 +1,9 @@
 # 单master kubernetes 集群安装(本地测试)
-# 1. 获取默认初始化参数文件
+## 1. 获取默认初始化参数文件
  > *  [kubeadm init config文档](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
  > *  kubeadm config print init-defaults > kubeadm-config.yaml
 
-# 2. 修改 kubeadm-config.yaml
+## 2. 修改 kubeadm-config.yaml
 
  > *  修改镜像仓库 imageRepository: local.xxx.repository
  > *  配置 external etcd
@@ -57,7 +57,7 @@ networking:
 scheduler: {}
 ```
 
-# 3. kubeadm init master
+## 3. kubeadm init master
 > * kubeadm init --config=kubeadm-config.yaml
 ```text
 kubeadm init
@@ -83,17 +83,31 @@ kubeadm init
 
 ```text
 安装成功会提示
-kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
-```
-> * mkdir $HOME/.kube
-> * sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-> * sudo chown currentUser:currentUserGroup  $HOME/.kube/config
+ ......
+Your Kubernetes master has initialized successfully!
 
-# 4. node 加入集群
+To start using your cluster, you need to run (as a regular user):
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  
+You can now join any number of machines by running the following on each node as root:
+  kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
+```
+
+## 4. kubectl 环境变量配置
+  - 非root:
+    - mkdir -p ~/.kube
+    - sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
+    - sudo chown xx:xx ~/.kube/config
+  - root:
+    - export KUBECONFIG=/etc/kubernetes/admin.conf
+
+## 5. node 加入集群
 > * 在需要加入集群的node执行: kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
 
-# 5. 遇到的问题
-## 5.1 kubelet 版本与配置版本不一致
+## 6. 遇到的问题
+### 6.1 kubelet 版本与配置版本不一致
 ```
 [ERROR KubeletVersion]: the kubelet version is higher than the control plane version. This is not a supported version skew and may lead to a malfunctional cluster. Kubelet version: "1.15.0" Control plane version: "1.14.0"
 ```
@@ -101,7 +115,7 @@ kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
 > * 解决方式2: kubeadm init 参数 --kubernetes-version=v1.15.0
 
 
-# 6. calical.yaml
+## 7. 附录: calical.yaml
 
 ```yaml
 
