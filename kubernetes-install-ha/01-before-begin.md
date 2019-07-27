@@ -20,4 +20,4 @@
  - [install docker](https://docs.docker.com/install/linux/docker-ce/centos/)
  
 ## 4. 安装 kubelet
- - [03_install_kublet.md](03-install-kublet.md)
+ - [03-install-kublet.md](03-install-kublet.md)

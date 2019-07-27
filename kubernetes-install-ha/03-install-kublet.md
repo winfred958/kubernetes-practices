@@ -1,4 +1,7 @@
 # kubernetes kubelet install [官网](https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#%E5%AE%89%E8%A3%85-kubeadm-kubelet-%E5%92%8C-kubectl)
+## before start
+ - [before begin](01-before-begin.md)
+
 ## 1.配置仓库
  > * vim /etc/yum.repos.d/kubernetes.repo   #(aliyun 镜像)
 
