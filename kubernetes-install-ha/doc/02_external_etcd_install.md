@@ -1,3 +1,4 @@
+# etcd 外置集群安装
 ## 1. etcd 安装
 > * yum install -y etcd
 ```

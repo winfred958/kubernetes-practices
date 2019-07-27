@@ -1,3 +1,4 @@
+# kubernetes kubelet install
 ## 1.配置仓库
  > * vim /etc/yum.repos.d/kubernetes.repo   # (aliyun 镜像)
 
@@ -11,7 +12,7 @@ gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors
 exclude=kube*
 ```
 ## 2. 安装 kubelet kubeadm kubectl
-> yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+ - yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
 ## 3. 配置自启动
 > * systemctl enable kubelet

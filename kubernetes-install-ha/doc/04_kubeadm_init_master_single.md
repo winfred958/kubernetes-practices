@@ -1,4 +1,4 @@
-# 
+# 单master kubernetes 集群安装(本地测试)
 # 1. 获取默认初始化参数文件
  > *  [kubeadm init config文档](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
  > *  kubeadm config print init-defaults > kubeadm-config.yaml
