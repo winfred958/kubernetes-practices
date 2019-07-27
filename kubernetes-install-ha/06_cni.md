@@ -1,6 +1,6 @@
 # 1.kubernetes CNI 网络插件
  - [官网 CNI 教程](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
-```
+```text
 kubadmin不涉及网络插件CNI的初始化
 因此kubeadm初步安装的机器不具备网络功能
 任何pod自带的的coreDNS都无法正常工作
@@ -25,13 +25,13 @@ calico.yaml
             - name: CALICO_IPV4POOL_CIDR
               value: "192.168.0.0/16"
 ```
-```
+```text
 修改kubnetes服务启动参数, 并重启
 	1. 配置master node上, kube-apiserver的启动参数: --allow-privileged=true, (因为calico-node需要以特权形式运行在各node上)
 	2. 配置各Node上kubelet服务的启动参数: --network-plugin=cni, (使用CNI网络插件)
 ```
 
-```
+```text
 创建Calico服务, 包括 calico-node, calico-policy-controller, 需要创建资源如下
 	1. 创建ConfigMap calico-config, 包含calico所需配置参数
 	2. 创建Secret calico-etcd-secrets, 用于使用TLS方式连接etcd

@@ -11,7 +11,7 @@ h3-k8s-local
 > * vim /etc/etcd/etcd.conf
 
 h1-k8s-local
-```
+```properties
 #[Member]
 #ETCD_CORS=""
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
@@ -106,7 +106,8 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 ## 3. etcd  自启动
 ### 3.1 修改 /usr/lib/systemd/system/etcd.service
 > * vim /usr/lib/systemd/system/etcd.service
-```
+
+```bash
 [Unit]
 Description=Etcd Server
 After=network.target
@@ -145,7 +146,7 @@ WantedBy=multi-user.target
 ## 4.验证etcd
 ### 4.1 查看节点
 > * etcdctl member list
-```
+```text
 [root@host-01 ~]# etcdctl member list
 39c503e55d72d28: name=etcd3 peerURLs=http://host-03:2380 clientURLs=http://127.0.0.1:2379,http://host-03:2379 isLeader=false
 db08cbcec431402d: name=etcd1 peerURLs=http://host-01:2380 clientURLs=http://host-01:2379 isLeader=false
@@ -154,18 +155,18 @@ f843f53469625da2: name=etcd2 peerURLs=http://host-02:2380 clientURLs=http://127.
 ### 4.2 数据写入验证
 > * @host-01 运行: etcdctl set /test/test-path "test"
 > * @host-03 运行: etcdctl get /test/test-path
-```
+```text
 [root@host-01 ~]# etcdctl set /test/test-path "test"
 test
 ```
-```
+```text
 [root@host-03 ~]# etcdctl get /test/test-path 
 test
 ```
 
 ## 5.遇到的问题
 ### 5.1 hostname 无法识别
-```
+```text
 error verifying flags, expected IP in URL for binding (http://host-01:2380). See 'etcd --help'.
 ```
 > * 解决方案: client url 使用 ip

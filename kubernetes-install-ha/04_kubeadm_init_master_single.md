@@ -59,7 +59,7 @@ scheduler: {}
 
 # 3. kubeadm init master
 > * kubeadm init --config=kubeadm-config.yaml
-```
+```text
 kubeadm init
 网络插件安装需要指定特殊参数
 例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16
@@ -81,7 +81,7 @@ kubeadm init
     podSubnet: 192.168.0.0/16
 ```
 
-```
+```text
 安装成功会提示
 kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
 ```
