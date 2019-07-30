@@ -29,6 +29,7 @@ calico.yaml
 修改kubnetes服务启动参数, 并重启
 	1. 配置master node上, kube-apiserver的启动参数: --allow-privileged=true, (因为calico-node需要以特权形式运行在各node上)
 	2. 配置各Node上kubelet服务的启动参数: --network-plugin=cni, (使用CNI网络插件)
+	3. 重启 systemctl restart kubelet
 ```
 
 ```text
