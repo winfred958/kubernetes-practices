@@ -2,9 +2,9 @@
 ## before start
  - [before begin](01-before-begin.md)
  - [install kubelet kubeadm kubectl](03-install-kublet.md)
-## 1. 获取默认初始化参数文件
- > *  [kubeadm init config文档(kubeadm/v1beta2)](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
- > *  kubeadm config print init-defaults > kubeadm-config.yaml
+## 1. 获取默认初始化参数文件 [kubeadm init config文档(kubeadm/v1beta2)](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
+ - 生成默认kubeadm-config
+   - kubeadm config print init-defaults > kubeadm-config.yaml
 
 ## 2. 修改 kubeadm-config.yaml
 
@@ -62,7 +62,7 @@ scheduler: {}
 ```
 
 ## 3. kubeadm init master
-> * kubeadm init --config=kubeadm-config.yaml
+ -  kubeadm init --config=kubeadm-config.yaml
 ```text
 kubeadm init
 网络插件安装需要指定特殊参数
