@@ -118,6 +118,29 @@ You can now join any number of machines by running the following on each node as
 > * 解决方式1: 修改kubeadm-config.yaml文件 kubernetesVersion: v1.15.0
 > * 解决方式2: kubeadm init 参数 --kubernetes-version=v1.15.0
 
+### 6.2 无法获取国外kube镜像
+ - 1.手动阿里云获取镜像
+```bash
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.15.0
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.15.0
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.15.0
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.15.0
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.3.10
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.3.1
+
+docker images
+```
+ - 2.docker tag
+ ```bash
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.15.0           k8s.gcr.io/kube-apiserver:v1.15.0
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.15.0  k8s.gcr.io/kube-controller-manager:v1.15.0
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.15.0           k8s.gcr.io/kube-scheduler:v1.15.0
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.15.0               k8s.gcr.io/kube-proxy:v1.15.0
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1                        k8s.gcr.io/pause:3.1
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.3.10                      k8s.gcr.io/etcd:3.3.10
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.3.1                    k8s.gcr.io/coredns:1.3.1
+```
 
 ## 7. 附录: calical.yaml
 

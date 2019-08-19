@@ -29,7 +29,7 @@
      - vim /etc/sysctl.d/k8s.conf
      - net.bridge.bridge-nf-call-ip6tables = 1
      - net.bridge.bridge-nf-call-iptables = 1
-     - sysctl --system
+     - 刷新: sysctl --system
 
    - 确保br_netfilter模式加载, 查看lsmod | grep br_netfilter
      - modprobe br_netfilter
