@@ -23,9 +23,18 @@
  - [03-install-kublet.md](03-install-kublet.md)
 
 
-## 5. 其他参考配置
+## 5. 其他参考配置 & 注意事项
+ - 注意事项
+   - RHEL/CentOS 7上的一些用户报告了由于iptables被绕过而导致流量路由错误的问题。你应该确保net.bridge.bridge-nf-call-iptables = 1
+     - vim /etc/sysctl.d/k8s.conf
+     - net.bridge.bridge-nf-call-ip6tables = 1
+     - net.bridge.bridge-nf-call-iptables = 1
+     - sysctl --system
 
-/etc/sysctl.d/k8s.conf
+   - 确保br_netfilter模式加载, 查看lsmod | grep br_netfilter
+     - modprobe br_netfilter
+
+/etc/sysctl.d/k8s.conf 其他配置
 ```bash
 vm.swappiness=0
 
@@ -33,6 +42,8 @@ vm.overcommit_memory=1
 vm.panic_on_oom=0
 
 net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-ip6tables=1
+
 net.ipv4.tcp_keepalive_time=600
 net.ipv4.tcp_keepalive_intvl=30
 net.ipv4.tcp_keepalive_probes=10
@@ -55,5 +66,4 @@ fs.inotify.max_user_watches=89100
 fs.may_detach_mounts=1
 fs.file-max=52706963
 fs.nr_open=52706963
-net.bridge.bridge-nf-call-arptables=1
 ```
