@@ -5,7 +5,7 @@
  - [wiki](https://github.com/kubernetes/dashboard/wiki)
  
 ```bash
-curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml
+curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 mv recommended.yaml kubernetes-dashboard.yaml
 kubectl apply -f kubernetes-dashboard.yaml
 ```
