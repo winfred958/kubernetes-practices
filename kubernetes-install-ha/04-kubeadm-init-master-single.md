@@ -57,21 +57,20 @@ kubernetesVersion: v1.15.0
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
-  podSubnet: 192.168.0.0/16
+  podSubnet: 172.18.0/16
 scheduler: {}
 ```
 
 ## 3. kubeadm init master
- -  kubeadm init --config=kubeadm-config.yaml
+ -  kubeadm init --config kubeadm-config.yaml --ignore-preflight-errors=Swap
 ```text
 kubeadm init
 网络插件安装需要指定特殊参数
-例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16 (默认)
+例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16 (默认 CALICO_IPV4POOL_CIDR)
 
 注意: 也可以指定其他无冲突网段, 例如: 172.20.0.0/16, 与calico.yaml 中 CALICO_IPV4POOL_CIDR 保持一致
 
---config 和 --pod-network-cidr不能同时存在
-所以需要使用命令行方式(recommend): 
+--config 和 --pod-network-cidr 如果不能同时存在可以使用命令行方式: 
   kubeadm init \
     --apiserver-advertise-address=0.0.0.0 \
     --apiserver-bind-port 6443 \
@@ -83,6 +82,10 @@ kubeadm init
   等价于配置文件中: 
   networking:
     podSubnet: 192.168.0.0/16
+
+注意:
+  镜像pull失败, 可以使用阿里云镜像仓库:
+    --image-repository registry.aliyuncs.com/google_containers
 ```
 
 ```text
