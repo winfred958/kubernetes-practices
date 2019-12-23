@@ -5,17 +5,19 @@ kubadmin不涉及网络插件CNI的初始化
 因此kubeadm初步安装的机器不具备网络功能
 任何pod自带的的coreDNS都无法正常工作
 ```
-# 2. CNI 插件 calico
+# 2. CNI 插件 calico[官网](https://www.projectcalico.org/)
 ## 2.1 calico 安装说明
 ```
 网络插件安装需要指定特殊参数
 例如 calico 需要指定 kubeadm init --pod-network-cidr=192.168.0.0/16
+    与 calico.yaml - name: CALICO_IPV4POOL_CIDR 的 value 保持一致
 ```
 - 下载 calico.yml
     - curl -O https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 - 修改 calico.yaml
     - 添加 data.etcd_endpoints: "http://xxx:2379,http://xxx:2379"
-- 安装 kubeadm deploy -f calico.yaml 
+- 安装 calico
+    - kubeadm deploy -f calico.yaml 
 
 calico.yaml
 ```
@@ -42,5 +44,5 @@ calico.yaml
 ```
 
 ## 2.1 calico 安装步骤
-  * [calico 官方 Quickstart](https://docs.projectcalico.org/v3.8/getting-started/kubernetes/)
-  * [Installing Calico for policy and networking (recommended)](https://docs.projectcalico.org/v3.8/getting-started/kubernetes/installation/calico)
+  * [calico 官方 Quickstart](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/)
+  * [Installing Calico for policy and networking (recommended)](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/calico)
