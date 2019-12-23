@@ -44,5 +44,10 @@ calico.yaml
 ```
 
 ## 2.1 calico 安装步骤
-  * [calico 官方 Quickstart](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/)
-  * [Installing Calico for policy and networking (recommended)](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/calico)
+  * [calico 官方 Quickstart 简单安装](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/)
+  * [Installing Calico for policy and networking (recommended) 推荐安装](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/calico)
+  * [Installing Calico for policy (advanced) 高级安装](https://docs.projectcalico.org/v3.11/getting-started/kubernetes/installation/other)
+  
+  
+# 3. CNI 网络插件  Flannel
+# 4. CNI 网络插件  WeaveNet
