@@ -8,8 +8,12 @@
  - 开放指定端口, [here](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)
  - 关闭内存swap 
    - swapoff -a (临时)
+   - swap 永久关闭: 
+     - vim /etc/fstab #注释swap行
+     - systctl -p # 刷新
    - echo "vm.swappiness = 0" >> /etc/sysctl.d/k8s.conf
-## 2. 升级系统内核 [教程](http://elrepo.org/tiki/tiki-index.php)
+
+## 2. 升级系统内核 (非必须) [教程](http://elrepo.org/tiki/tiki-index.php)
 ```bash
   rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
   yum install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
