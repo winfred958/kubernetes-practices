@@ -67,7 +67,7 @@ exclude=kube*
 ## 6. 配置 被kubelet control-plan 节点使用的 cgroup driver, 然后重启kubelet
  - CentOS/RHEL
    - vim /etc/sysconfig/kubelet
-     - KUBELET_EXTRA_ARGS=--cgroup-driver=<value>
+     - KUBELET_EXTRA_ARGS=--cgroup-driver=\<value>
      ```bash
      systemctl daemon-reload
      systemctl restart kubelet
