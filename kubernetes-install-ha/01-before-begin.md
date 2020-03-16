@@ -1,4 +1,4 @@
-# kubernetes 安装前准备
+# kubernetes 安装前准备 [before-you-begin](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin)
 ## 1. 操作系统要求
  - centOS 7/ RHEL7/ 其他...(其他系统没玩过)
  - RAM 2G+
@@ -20,12 +20,53 @@
   yum --enablerepo=elrepo-kernel install -y kernel-lt kernel-lt-devel
   grub2-set-default 0
 ```
-## 3. 安装 runtime (docker)
+## 3. 安装 runtime (docker) [官网](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker)
  - [install docker](https://docs.docker.com/install/linux/docker-ce/centos/)
- 
-## 4. 安装 kubelet
- - [03-install-kublet.md](03-install-kublet.md)
+### 3.1 remove 已经存在的老版本
+```bash
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+``` 
+### 3.2 Install Docker Engine - Community
+#### 3.2.1 Install required packages
+```bash
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+```
+#### 3.2.2 set up repository
+```bash
+# 官方镜像
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
 
+# 阿里云镜像(推荐)
+sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+#### 3.2.3 Install Docker Engine - Community
+```bash
+sudo yum install docker-ce docker-ce-cli containerd.io
+# OR
+sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+```
+#### 3.2.4 auto start
+```bash
+systemctl enable docker
+systemctl start docker
+systemctl status docker
+```
+
+## 4. 安装 kubelet
+ - [03-install-kublet-kubeadm.md](03-install-kublet-kubeadm.md)
 
 ## 5. 其他参考配置 & 注意事项
  - 注意事项
