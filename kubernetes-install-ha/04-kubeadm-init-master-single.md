@@ -62,7 +62,7 @@ scheduler: {}
 ```
 
 ## 3. kubeadm init master
- -  kubeadm init --config kubeadm-config.yaml --ignore-preflight-errors=Swap
+ -  (推荐)kubeadm init --config kubeadm-config.yaml --ignore-preflight-errors=Swap
 ```text
 kubeadm init
 网络插件安装需要指定特殊参数
