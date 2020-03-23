@@ -10,7 +10,7 @@
    - swapoff -a (临时)
    - swap 永久关闭: 
      - vim /etc/fstab #注释swap行
-     - systctl -p # 刷新
+     - systctl -p # 刷新 
    - echo "vm.swappiness = 0" >> /etc/sysctl.d/k8s.conf
 
 ## 2. 升级系统内核 (非必须) [教程](http://elrepo.org/tiki/tiki-index.php)
@@ -22,6 +22,13 @@
 ```
 ## 3. 安装 runtime (docker) [官网](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker)
  - [install docker](https://docs.docker.com/install/linux/docker-ce/centos/)
+ - 国内镜像配置
+    - vim /etc/docker/daemon.json
+        - ```json
+          {
+            "registry-mirrors": ["https://registry.docker-cn.com"]
+          }
+          ```
 ### 3.1 remove 已经存在的老版本
 ```bash
 sudo yum remove docker \

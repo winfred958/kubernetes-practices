@@ -2,11 +2,15 @@
 ## before start
  - [before begin](01-before-begin.md)
  - [install kubelet kubeadm kubectl](03-install-kublet-kubeadm.md)
-## 1. 获取默认初始化参数文件 [kubeadm init config文档(kubeadm/v1beta2)](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
- - 生成默认kubeadm-config
-   - kubeadm config print init-defaults > kubeadm-config.yaml
+## 1. 获取默认初始化参数文件 [kubeadm config文档(kubeadm/v1beta2)](https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2)
+ - 获取 kubeadm config init 默认参数文件 
+    - kubeadm config print init-defaults > kubeadm-init-config.yaml
+ - 获取 kubeadm config join 默认参数文件
+    - kubeadm config pring join-defaults > kubeadm-join.yaml
+ - 获取更多命令
+    - kubeadm config --help 
 
-## 2. 修改 kubeadm-config.yaml
+## 2. 修改 kubeadm-init.yaml
 
  > * 修改镜像仓库 imageRepository: local.xxx.repository
  > * 配置 external etcd
@@ -63,44 +67,44 @@ scheduler: {}
 
 ## 3. kubeadm init master
  -  (推荐)kubeadm init --config kubeadm-config.yaml --ignore-preflight-errors=Swap
-```text
-kubeadm init
-网络插件安装需要指定特殊参数
-例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16 (默认 CALICO_IPV4POOL_CIDR)
-
-注意: 也可以指定其他无冲突网段, 例如: 172.20.0.0/16, 与calico.yaml 中 CALICO_IPV4POOL_CIDR 保持一致
-
---config 和 --pod-network-cidr 如果不能同时存在可以使用命令行方式: 
-  kubeadm init \
-    --apiserver-advertise-address=0.0.0.0 \
-    --apiserver-bind-port 6443 \
-    --pod-network-cidr=192.168.0.0/16 \
-    --kubernetes-version=v1.15.0
-    
-注意:
-  命令行参数 --pod-network-cidr=192.168.0.0/16
-  等价于配置文件中: 
-  networking:
-    podSubnet: 192.168.0.0/16
-
-注意:
-  镜像pull失败, 可以使用阿里云镜像仓库:
-    --image-repository registry.aliyuncs.com/google_containers
-```
-
-```text
+    - ```text
+        kubeadm init
+        网络插件安装需要指定特殊参数
+        例如: calico 需要指定 --pod-network-cidr=192.168.0.0/16 (默认 CALICO_IPV4POOL_CIDR)
+        
+        注意: 也可以指定其他无冲突网段, 例如: 172.20.0.0/16, 与calico.yaml 中 CALICO_IPV4POOL_CIDR 保持一致
+        
+        --config 和 --pod-network-cidr 如果不能同时存在可以使用命令行方式: 
+          kubeadm init \
+            --apiserver-advertise-address=0.0.0.0 \
+            --apiserver-bind-port 6443 \
+            --pod-network-cidr=192.168.0.0/16 \
+            --kubernetes-version=v1.15.0
+            
+        注意:
+          命令行参数 --pod-network-cidr=192.168.0.0/16
+          等价于配置文件中: 
+          networking:
+            podSubnet: 192.168.0.0/16
+        
+        注意:
+          镜像pull失败, 可以使用阿里云镜像仓库:
+            --image-repository registry.aliyuncs.com/google_containers
+       ```
 安装成功会提示
- ......
-Your Kubernetes master has initialized successfully!
-
-To start using your cluster, you need to run (as a regular user):
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-  
-You can now join any number of machines by running the following on each node as root:
-  kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
-```
+ - ```text
+    
+     ......
+    Your Kubernetes master has initialized successfully!
+    
+    To start using your cluster, you need to run (as a regular user):
+      mkdir -p $HOME/.kube
+      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      sudo chown $(id -u):$(id -g) $HOME/.kube/config
+      
+    You can now join any number of machines by running the following on each node as root:
+      kubeadm join xxx --token xxx --discovery-token-ca-cert-hash sha256:xxx
+   ```
 
 ## 4. kubectl 环境变量配置
   - 非root:
