@@ -33,7 +33,8 @@
             - 服务发现
         - DNS
             - DNS功能
-## 2. kubeadm join 的工作流程      
+## 2. kubeadm join 的工作流程
 
 ## 3. Linux 证书生成工具
-   1. OpenSSL      
+   1. OpenSSL
+   
