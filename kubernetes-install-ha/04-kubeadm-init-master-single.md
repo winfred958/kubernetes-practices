@@ -8,7 +8,7 @@
  - 获取 kubeadm config join 默认参数文件
     - kubeadm config pring join-defaults > kubeadm-join-config.yaml
  - 获取更多命令
-    - kubeadm config --help 
+    - kubeadm config --help
 
 ## 3. 使用 kubeadm init 初始化集群 
  - - (推荐)kubeadm init --config kubeadm-init-config.yaml

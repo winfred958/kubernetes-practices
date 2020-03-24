@@ -1,5 +1,5 @@
 ## 1. kubeadm init 的工作流程
-   1. 一系列检查, 用来却这个node是否可以用来不是 kublet. 这一步检查我们称为 -- Preflight Checks
+   1. 首先会进行一系列检查, 用来确认node是否可以用来部署 kublet. 这一步检查我们称为 --- Preflight Checks
         - Linux 内核版本检查, 是否 3.10+
         - Linux Cgroup 模块是否可用?
         - hostname是否标准? 必须使用标准DNS命名(RFC 1123)
@@ -34,7 +34,6 @@
         - DNS
             - DNS功能
 ## 2. kubeadm join 的工作流程      
-      
-      
+
 ## 3. Linux 证书生成工具
    1. OpenSSL      
