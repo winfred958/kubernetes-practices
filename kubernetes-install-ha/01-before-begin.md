@@ -10,8 +10,8 @@
    - swapoff -a (临时)
    - swap 永久关闭: 
      - vim /etc/fstab #注释swap行
-     - systctl -p # 刷新 
    - echo "vm.swappiness = 0" >> /etc/sysctl.d/k8s.conf
+   - systctl -p # 刷新 
 
 ## 2. 升级系统内核 (非必须) [教程](http://elrepo.org/tiki/tiki-index.php)
 ```bash
