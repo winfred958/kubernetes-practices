@@ -1,2 +1,3 @@
 - [k8s 架构](01-k8s-architecture.md)
 - [kubeadm 详情](02-k8s-kubeadm-原理.md)
+- [workload (Pod & workload resource)](03-workload.md) -- **重要**
